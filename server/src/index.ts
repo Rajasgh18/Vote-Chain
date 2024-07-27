@@ -1,3 +1,5 @@
+import 'module-alias/register';
+
 import express, { Response } from 'express';
 import cors from "cors";
 import { connectDB, sequelize } from '@/db';
@@ -5,6 +7,8 @@ import { connectDB, sequelize } from '@/db';
 import PartyRoute from '@/routes/party';
 import CandidateRoute from '@/routes/candidate';
 import VoterRoute from '@/routes/voter';
+import LoginRoute from '@/routes/login';
+import { authenticateToken } from './middleware/authenticate';
 
 const allowedOrigins = ["http://localhost:5173"];
 
@@ -26,9 +30,10 @@ App.use(cors({
     credentials: true
 }));
 
-App.use("/api/party", PartyRoute);
-App.use("/api/candidate", CandidateRoute);
-App.use("/api/voter", VoterRoute);
+App.use("/api/party", authenticateToken, PartyRoute);
+App.use("/api/candidate", authenticateToken, CandidateRoute);
+App.use("/api/voter", authenticateToken, VoterRoute);
+App.use("/api/login", LoginRoute);
 
 App.get("/", (_, res: Response) => {
     res.status(200).send("Server Running correctly");

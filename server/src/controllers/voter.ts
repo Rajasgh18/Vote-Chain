@@ -14,7 +14,7 @@ export const getVoters = async (req: Request, res: Response) => {
 
 export const getVoter = async (req: Request, res: Response) => {
   try {
-    const voterId = req.params.id;
+    const voterId = req.body.id;
     if (voterId.length === 0) return res.status(400).json({ message: "Invalid Voter ID" });
 
     const voter = await Voter.findOne({ where: { voterId } });
@@ -39,7 +39,7 @@ export const createVoter = async (req: Request, res: Response) => {
 };
 
 export const updateVoter = async (req: Request, res: Response) => {
-  const voterId = req.params.id;
+  const voterId = req.body.id;
   if (voterId.length === 0) return res.status(400).json({ message: "Invalid Voter ID" });
 
   try {
@@ -64,7 +64,7 @@ export const updateVoter = async (req: Request, res: Response) => {
 };
 
 export const deleteVoter = async (req: Request, res: Response) => {
-  const voterId = req.params.id;
+  const voterId = req.body.id;
   if (!voterId) return res.status(400).json({ messsage: "Invalid Voter ID" });
 
   try {

@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '@/db';
-import {body, validationResult} from 'express-validator';
 
 class Voter extends Model {
     public voterId!: string;
