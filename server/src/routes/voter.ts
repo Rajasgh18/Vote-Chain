@@ -5,8 +5,8 @@ import { getVoters, getVoter, createVoter, updateVoter, deleteVoter } from '@/co
 const Router = express();
 
 Router
-    .get("/", getVoters)
-    .get("/:id", getVoter)
+    .get("/", getVoter)
+    .get("/all", getVoters)
     .post("/", [
         check('voterId').isLength({ min: 1 }).withMessage('Voter ID is required').optional(),
         check('image').isURL().withMessage('Image must be a valid URL'),
@@ -15,7 +15,7 @@ Router
         check('phoneNumber').isLength({ min: 10 }).withMessage('Phone number must be at least 10 characters long'),
         check('district').isLength({ min: 1 }).withMessage('District is required')
     ], createVoter)
-    .put("/:id", [
+    .put("/", [
         check('voterId').isLength({ min: 1 }).withMessage('Voter ID is required').optional(),
         check('image').isURL().withMessage('Image must be a valid URL').optional(),
         check('email').isEmail().withMessage('Email must be valid').optional(),
@@ -23,6 +23,6 @@ Router
         check('phoneNumber').isLength({ min: 10 }).withMessage('Phone number must be at least 10 characters long').optional(),
         check('district').isLength({ min: 1 }).withMessage('District is required').optional()
     ], updateVoter)
-    .delete("/:id", deleteVoter);
+    .delete("/", deleteVoter);
 
 export default Router;
