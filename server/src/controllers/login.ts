@@ -52,7 +52,7 @@ export const verifyOTP = async (req: Request, res: Response) => {
 
         if (new Date > foundOtp.expiry) return res.status(403).json({ "message": "OTP expired" });
 
-        const token = jwt.sign({ voterId }, process.env.SECRET_KEY!, { expiresIn: '1h' });
+        const token = jwt.sign({ voterId }, process.env.SECRET_KEY!, { expiresIn: '24h' });
         res.status(200).json({ token, message: "OTP verified successfully" });
 
     } catch (error: any) {
