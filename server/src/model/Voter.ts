@@ -3,7 +3,7 @@ import { sequelize } from '@/db';
 
 class Voter extends Model {
     public voterId!: string;
-    public image!: string;
+    public image!: Buffer;
     public email!: string;
     public name!: string;
     public phoneNumber!: string;
@@ -18,11 +18,8 @@ Voter.init(
             allowNull: false,
         },
         image: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                isUrl: true,
-            },
+            type: DataTypes.BLOB,
+            allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
