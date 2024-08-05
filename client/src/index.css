@@ -90,3 +90,10 @@ h3{
 h4{
   @apply text-xl
 }
+
+th, td{
+  @apply border p-2 border-slate-400 text-slate-700 font-normal text-center
+}
+th{
+  @apply font-medium
+}
